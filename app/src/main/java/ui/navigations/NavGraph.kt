@@ -17,9 +17,12 @@ fun NavGraph(navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = "movies") {
         composable("movies") {
-            MovieListScreen(movies = movieViewModel.movies) { movieId ->
-                navController.navigate("details/$movieId")
-            }
+            MovieListScreen(
+                movies = movieViewModel.movies,
+                onMovieClick = { movieId ->
+                    navController.navigate("details/$movieId")
+                }
+            )
         }
         composable("details/{movieId}") { backStackEntry ->
             val movieId = backStackEntry.arguments?.getString("movieId")?.toInt() ?: 0
