@@ -13,7 +13,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -67,6 +67,16 @@ dependencies {
 
     // --- Загрузка изображений (Coil)
     implementation(libs.coil.compose)
+
+    // --- Network dependencies
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+
+    // --- Lifecycle LiveData
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     // --- Тесты
     testImplementation(libs.junit)

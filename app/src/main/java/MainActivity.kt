@@ -24,16 +24,20 @@ class MainActivity : ComponentActivity() {
                 bottomBar = {
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentRoute = navBackStackEntry?.destination?.route
-                    val selectedScreen = when (currentRoute) {
-                        Screen.Movies.route -> Screen.Movies
-                        Screen.Favorites.route -> Screen.Favorites
-                        else -> Screen.Movies
-                    }
 
-                    BottomNavBar(selectedScreen = selectedScreen) { screen ->
-                        navController.navigate(screen.route) {
-                            launchSingleTop = true
-                            restoreState = true
+                    // Показываем bottom bar только на основных экранах
+                    if (currentRoute == Screen.Movies.route || currentRoute == Screen.Favorites.route) {
+                        val selectedScreen = when (currentRoute) {
+                            Screen.Movies.route -> Screen.Movies
+                            Screen.Favorites.route -> Screen.Favorites
+                            else -> Screen.Movies
+                        }
+
+                        BottomNavBar(selectedScreen = selectedScreen) { screen ->
+                            navController.navigate(screen.route) {
+                                launchSingleTop = true
+                                restoreState = true
+                            }
                         }
                     }
                 }

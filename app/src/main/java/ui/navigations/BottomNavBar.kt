@@ -9,21 +9,30 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 
-sealed class Screen(val route: String, val icon: ImageVector, val label: String) {
-    object Movies : Screen("movies", Icons.Default.Home, "Movies")
-    object Favorites : Screen("favorites", Icons.Default.Favorite, "Favorites")
+sealed class Screen(val route: String, val label: String) {
+    object Movies : Screen("movies", "Movies")
+    object Favorites : Screen("favorites", "Favorites")
+    object MovieDetails : Screen("details/{movieId}", "Movie Details")
+
+    companion object {
+        fun createMovieDetailsRoute(movieId: Int) = "details/$movieId"
+    }
 }
 
 @Composable
 fun BottomNavBar(selectedScreen: Screen, onScreenSelected: (Screen) -> Unit) {
     NavigationBar {
-        listOf(Screen.Movies, Screen.Favorites).forEach { screen ->
-            NavigationBarItem(
-                icon = { Icon(screen.icon, contentDescription = screen.label) },
-                label = { Text(screen.label) },
-                selected = screen == selectedScreen,
-                onClick = { onScreenSelected(screen) }
-            )
-        }
+        NavigationBarItem(
+            icon = { Icon(androidx.compose.material.icons.Icons.Default.Home, contentDescription = "Movies") },
+            label = { Text("Movies") },
+            selected = selectedScreen == Screen.Movies,
+            onClick = { onScreenSelected(Screen.Movies) }
+        )
+        NavigationBarItem(
+            icon = { Icon(androidx.compose.material.icons.Icons.Default.Favorite, contentDescription = "Favorites") },
+            label = { Text("Favorites") },
+            selected = selectedScreen == Screen.Favorites,
+            onClick = { onScreenSelected(Screen.Favorites) }
+        )
     }
 }
