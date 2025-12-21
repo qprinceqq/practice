@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.practice3.di.AppContainer
 import com.example.practice3.ui.navigations.BottomNavBar
 import com.example.practice3.ui.navigations.NavGraph
 import com.example.practice3.ui.navigations.Screen
@@ -17,6 +18,7 @@ import com.example.practice3.ui.navigations.Screen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppContainer.init(this)
         setContent {
             val navController = rememberNavController()
 

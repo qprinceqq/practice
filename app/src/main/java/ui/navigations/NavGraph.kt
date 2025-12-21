@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.practice3.di.AppContainer
 import com.example.practice3.ui.screens.FavoritesScreen
+import com.example.practice3.ui.screens.FilterSettingsScreen
 import com.example.practice3.ui.screens.MovieDetailScreen
 import com.example.practice3.ui.screens.MovieListScreen
 import com.example.practice3.viewmodel.MovieViewModel
@@ -22,6 +23,9 @@ fun NavGraph(navController: NavHostController) {
                 viewModel = movieViewModel,
                 onMovieClick = { movieId ->
                     navController.navigate(Screen.createMovieDetailsRoute(movieId))
+                },
+                onFilterClick = {
+                    navController.navigate(Screen.FilterSettings.route)
                 }
             )
         }
@@ -34,7 +38,20 @@ fun NavGraph(navController: NavHostController) {
             movie?.let { MovieDetailScreen(it) }
         }
         composable(Screen.Favorites.route) {
-            FavoritesScreen()
+            FavoritesScreen(
+                onMovieClick = { movieId ->
+                    navController.navigate(Screen.createMovieDetailsRoute(movieId))
+                }
+            )
+        }
+        composable(Screen.FilterSettings.route) {
+            FilterSettingsScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onApplyFilters = {
+                    navController.popBackStack()
+                    // Здесь можно добавить логику обновления списка фильмов
+                }
+            )
         }
     }
 }

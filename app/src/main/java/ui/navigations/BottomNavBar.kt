@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBarItem
 sealed class Screen(val route: String, val label: String) {
     object Movies : Screen("movies", "Movies")
     object Favorites : Screen("favorites", "Favorites")
+    object FilterSettings : Screen("filter_settings", "Filter Settings")
     object MovieDetails : Screen("details/{movieId}", "Movie Details")
 
     companion object {
