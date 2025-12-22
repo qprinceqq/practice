@@ -11,6 +11,8 @@ import com.example.practice3.ui.screens.FavoritesScreen
 import com.example.practice3.ui.screens.FilterSettingsScreen
 import com.example.practice3.ui.screens.MovieDetailScreen
 import com.example.practice3.ui.screens.MovieListScreen
+import com.example.practice3.ui.screens.ProfileScreen
+import com.example.practice3.ui.screens.EditProfileScreen
 import com.example.practice3.viewmodel.MovieViewModel
 
 @Composable
@@ -51,6 +53,18 @@ fun NavGraph(navController: NavHostController) {
                     navController.popBackStack()
                     // Здесь можно добавить логику обновления списка фильмов
                 }
+            )
+        }
+        composable(Screen.Profile.route) {
+            ProfileScreen(
+                onEditProfileClick = {
+                    navController.navigate(Screen.EditProfile.route)
+                }
+            )
+        }
+        composable(Screen.EditProfile.route) {
+            EditProfileScreen(
+                onNavigateBack = { navController.popBackStack() }
             )
         }
     }

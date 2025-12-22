@@ -87,6 +87,9 @@ dependencies {
     // --- DataStore
     implementation(libs.androidx.datastore.preferences)
 
+    // --- Activity Result API для камеры и галереи
+    implementation(libs.androidx.activity.compose)
+
     // --- Тесты
     testImplementation(libs.junit)
     testImplementation("androidx.test:core:1.5.0")
@@ -99,4 +102,7 @@ dependencies {
 
     // Room testing
     testImplementation("androidx.room:room-testing:2.7.0")
+
+    // Download manager for resume download
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 }

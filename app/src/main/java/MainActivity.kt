@@ -28,10 +28,11 @@ class MainActivity : ComponentActivity() {
                     val currentRoute = navBackStackEntry?.destination?.route
 
                     // Показываем bottom bar только на основных экранах
-                    if (currentRoute == Screen.Movies.route || currentRoute == Screen.Favorites.route) {
+                    if (currentRoute == Screen.Movies.route || currentRoute == Screen.Favorites.route || currentRoute == Screen.Profile.route) {
                         val selectedScreen = when (currentRoute) {
                             Screen.Movies.route -> Screen.Movies
                             Screen.Favorites.route -> Screen.Favorites
+                            Screen.Profile.route -> Screen.Profile
                             else -> Screen.Movies
                         }
 

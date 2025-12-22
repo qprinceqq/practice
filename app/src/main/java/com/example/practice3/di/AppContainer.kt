@@ -6,6 +6,7 @@ import com.example.practice3.data.AppDatabase
 import com.example.practice3.data.BadgeCache
 import com.example.practice3.data.FavoritesRepository
 import com.example.practice3.data.FilterSettingsRepository
+import com.example.practice3.data.ProfileRepository
 import com.example.practice3.network.KinopoiskApi
 import com.example.practice3.network.createKinopoiskApi
 import com.example.practice3.repository.MovieRepository
@@ -13,6 +14,7 @@ import com.example.practice3.usecase.GetMoviesUseCase
 import com.example.practice3.viewmodel.FavoritesViewModel
 import com.example.practice3.viewmodel.FilterSettingsViewModel
 import com.example.practice3.viewmodel.MovieViewModel
+import com.example.practice3.viewmodel.ProfileViewModel
 
 /**
  * DI контейнер приложения
@@ -55,6 +57,11 @@ object AppContainer {
         BadgeCache()
     }
 
+    private val profileRepository: ProfileRepository by lazy {
+        val ctx = requireNotNull(context) { "AppContainer must be initialized with context" }
+        ProfileRepository(ctx)
+    }
+
     // Domain слой
     val getMoviesUseCase: GetMoviesUseCase by lazy {
         GetMoviesUseCase(movieRepository)
@@ -75,5 +82,10 @@ object AppContainer {
         val ctx = requireNotNull(context) { "AppContainer must be initialized with context" }
         val filterSettingsRepository = FilterSettingsRepository(ctx)
         return FilterSettingsViewModel(filterSettingsRepository, badgeCache)
+    }
+
+    // Функция для создания ProfileViewModel с контекстом
+    fun createProfileViewModel(): ProfileViewModel {
+        return ProfileViewModel(profileRepository)
     }
 }

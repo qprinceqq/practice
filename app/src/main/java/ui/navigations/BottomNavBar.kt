@@ -6,12 +6,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 
 sealed class Screen(val route: String, val label: String) {
     object Movies : Screen("movies", "Movies")
     object Favorites : Screen("favorites", "Favorites")
+    object Profile : Screen("profile", "Profile")
+    object EditProfile : Screen("edit_profile", "Edit Profile")
     object FilterSettings : Screen("filter_settings", "Filter Settings")
     object MovieDetails : Screen("details/{movieId}", "Movie Details")
 
@@ -34,6 +37,12 @@ fun BottomNavBar(selectedScreen: Screen, onScreenSelected: (Screen) -> Unit) {
             label = { Text("Favorites") },
             selected = selectedScreen == Screen.Favorites,
             onClick = { onScreenSelected(Screen.Favorites) }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Person, contentDescription = "Profile") },
+            label = { Text("Profile") },
+            selected = selectedScreen == Screen.Profile,
+            onClick = { onScreenSelected(Screen.Profile) }
         )
     }
 }
